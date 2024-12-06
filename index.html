@@ -9,14 +9,83 @@
             margin: 0;
             overflow: hidden;
             background: black;
+            font-family: 'Courier New', monospace;
         }
         canvas {
             display: block;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1;
+        }
+        #matrix-widget {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 2;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            border: 1px solid #0F0;
+            box-shadow: 0 0 20px rgba(0, 255, 0, 0.3);
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+        .matrix-cells {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            width: 100%;
+        }
+        .matrix-cell {
+            background: rgba(0, 20, 0, 0.8);
+            border: 1px solid #0F0;
+            padding: 8px;
+            color: #0F0;
+            width: calc(100% - 18px);
+            min-height: 24px;
+            resize: none;
+            font-family: 'Courier New', monospace;
+            line-height: 1.4;
+        }
+        .matrix-item {
+            background: rgba(0, 20, 0, 0.8);
+            border: 1px solid #0F0;
+            padding: 8px;
+            color: #0F0;
+            width: calc(100% - 18px);
+            font-family: 'Courier New', monospace;
+            line-height: 1.4;
+            cursor: pointer;
+        }
+        .matrix-item:hover {
+            background: rgba(0, 255, 0, 0.1);
+        }
+        #add-cell-btn {
+            background: transparent;
+            color: #0F0;
+            border: 1px solid #0F0;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-family: 'Courier New', monospace;
+            transition: all 0.3s;
+            margin-bottom: 10px;
+            width: 100%;
+        }
+        #add-cell-btn:hover {
+            background: rgba(0, 255, 0, 0.2);
         }
     </style>
 </head>
 <body>
     <canvas id="matrix"></canvas>
+    <div id="matrix-widget">
+        <button id="add-cell-btn">+ Add Cell</button>
+        <div class="matrix-cells"></div>
+    </div>
+    <script src="matrix-widget.js"></script>
     <script>
         const canvas = document.getElementById('matrix');
         const ctx = canvas.getContext('2d');
